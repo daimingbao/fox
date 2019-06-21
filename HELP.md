@@ -12,3 +12,5 @@ The following guides illustrate how to use some features concretely:
 * [Quick Start](https://github.com/mybatis/spring-boot-starter/wiki/Quick-Start)
 * [Messaging with Redis](https://spring.io/guides/gs/messaging-redis/)
 
+fox-狐狸项目
+by dmb 20190621
