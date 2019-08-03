@@ -1,5 +1,6 @@
-package cn.com.fox;
+package cn.com.fox.boot;
 
+import cn.com.fox.boot.FoxApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
