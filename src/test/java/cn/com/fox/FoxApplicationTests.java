@@ -11,7 +11,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
-import javax.sql.DataSource;
 import java.io.IOException;
 
 @RunWith(SpringRunner.class)

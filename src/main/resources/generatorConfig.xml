@@ -87,10 +87,17 @@
 
 
 
-        <table tableName="sys_company_trail_record" domainObjectName="SysCompanyTrailRecordDO"
+        <table tableName="social_insurance_payment" domainObjectName="SocialInsurancePayment"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false" schema="SysCompanyTrailRecordDO">
+               selectByExampleQueryId="true" schema="SocialInsurancePayment" >
+        </table>
+        <table tableName="log_request_social_insurance" domainObjectName="LogRequestSocialInsurance"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="true" schema="LogRequestSocialInsurance" >
+        </table>
+
 
             <!-- optional   , only for mybatis3 runtime
                  自动生成的键值（identity,或者序列值）
@@ -141,6 +148,6 @@
             -->
 <!--            <columnOverride column="" javaType=""	jdbcType=""	typeHandler=""	delimitedColumnName="" />-->
 
-        </table>
+
     </context>
 </generatorConfiguration>
