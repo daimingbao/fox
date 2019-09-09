@@ -13,7 +13,7 @@ public class RmiClient {
     public static void main(String args[]) {
         try {
             // 填写服务器ip
-            RmiService rmiService = (RmiService) Naming.lookup("rmi://127.0.0.1:9999/RHello");
+            RmiService rmiService = (RmiService) Naming.lookup("rmi://127.0.0.1:9999/hello");
             rmiService.hello();
         } catch (NotBoundException e) {
         } catch (MalformedURLException e) {
