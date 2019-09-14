@@ -87,15 +87,10 @@
 
 
 
-        <table tableName="social_insurance_payment" domainObjectName="SocialInsurancePayment"
+        <table tableName="system_notice" domainObjectName="SystemNotice"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="true" schema="SocialInsurancePayment" >
-        </table>
-        <table tableName="log_request_social_insurance" domainObjectName="LogRequestSocialInsurance"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="true" schema="LogRequestSocialInsurance" >
+               selectByExampleQueryId="true" schema="SystemNotice" >
         </table>
 
 

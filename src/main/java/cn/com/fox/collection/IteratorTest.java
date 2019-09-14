@@ -15,8 +15,16 @@ public class IteratorTest {
         List<String> abc = new ArrayList<>(3);
 
         abc.add("a");
+        
         abc.add("b");
         abc.add("c");
+        for (String a : abc) {
+            if ("a".equalsIgnoreCase(a)) {
+                abc.remove(a);
+            }
+        }
+
+
 
 
 
