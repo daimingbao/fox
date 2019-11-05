@@ -1,8 +1,0 @@
-spring:
-  application:
-    name: eureka-server
-
-server:
-  port: 12345
-
-debug: true
