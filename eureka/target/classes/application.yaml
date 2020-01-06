@@ -1,6 +1,13 @@
 spring:
   application:
     name: eureka-server
+  datasource:
+    driver-class-name: org.gjt.mm.mysql.Driver
+    url: jdbc:mysql://baobao.cdqfxhoa3p1y.ap-northeast-1.rds.amazonaws.com/baobao
+    hikari:
+
+      username: baobao
+      password: daimingbao
 
 server:
   port: 12345
