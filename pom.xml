@@ -6,6 +6,7 @@
         <module>eureka</module>
         <module>common</module>
         <module>web</module>
+        <module>dubbo</module>
     </modules>
 
     <parent>

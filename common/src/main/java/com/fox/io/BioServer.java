@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class BioServer {
 
-    private static ThreadPoolExecutor executorService = new ThreadPoolExecutor(10, 20, 2000l, TimeUnit.SECONDS, new ArrayBlockingQueue<>(20));
+    private static ThreadPoolExecutor executorService = new ThreadPoolExecutor(1, 1, 20l, TimeUnit.SECONDS, new ArrayBlockingQueue<>(20));
 
     public static void main(String[] args) throws IOException {
         server();
@@ -49,7 +49,6 @@ public class BioServer {
         public ClientAcceptRunnable(Socket socket) {
             this.socket = socket;
             try {
-                socket.getChannel();
                 inputStream = socket.getInputStream();
                 outputStream = socket.getOutputStream();
             } catch (Exception e) {
@@ -58,7 +57,6 @@ public class BioServer {
 
         @Override
         public void run() {
-            InputStream inputStream = null;
             String clientCommon = null;
             while (true) {
                 try {
@@ -70,28 +68,14 @@ public class BioServer {
                     clientCommon = bufferedReader.readLine();
                     System.out.println("客户端请求来了：" + clientCommon);
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    OutputStream outputStream  = socket.getOutputStream();
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
-                    bufferedWriter.write(clientCommon.split("#")[0]+" pong");
+                    bufferedWriter.write(clientCommon.split("#")[0]+" pong\n");
                     bufferedWriter.flush();
 
-                    byte[] b = new byte[1024];
-                    StringBuilder sb = new StringBuilder();
-                    while (System.in.read(b, 0, b.length) != -1) {
-                        sb.append(new String(b));
-                    }
-                    bufferedWriter.write(sb.toString()+" pong");
-                    bufferedWriter.flush();
-                    System.out.println("aaa");
-                    //                bufferedWriter.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
             }
 
         }
