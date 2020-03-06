@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+    <property name="logging.root" value="."/>
+    <property name="default.level" value="DEBUG"/>
+    <property name="app.name" value="taxIntegration"/>
+
+    <include resource="logback-warden.xml"/>
+
+    <!-- 业务日志 -->
+    <appender name="YOUR-APPLICATION-BIZ-APPENDER"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logging.root}/${app.name}/local/biz.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${logging.root}/${app.name}/local/biz.log.%d{yyyy-MM-dd}</FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%date [%-5level] [%thread] %logger{80} - %msg%X{traceId}%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- SQL日志 -->
+    <appender name="YOUR-APPLICATION-SQL-APPENDER"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logging.root}/${app.name}/local/sql.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${logging.root}/${app.name}/local/sql.log.%d{yyyy-MM-dd}</FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%date [%-5level] [%thread] %logger{80} - %msg%X{traceId}%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 缓存访问日志 -->
+    <logger name="ELEPHANT-CACHE" additivity="false">
+        <appender-ref ref="SYS-CACHE-DIGEST-APPENDER"/>
+        <appender-ref ref="ERROR-APPENDER"/>
+    </logger>
+
+    <logger name="com.servyou.tax.integration" additivity="false" level="${log.default.level}">
+        <appender-ref ref="YOUR-APPLICATION-BIZ-APPENDER"/>
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="com.servyou.tax.integration.mapper" additivity="false" level="${log.default.level}">
+        <appender-ref ref="YOUR-APPLICATION-SQL-APPENDER"/>
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="cn.com.servyou.xqy" additivity="false" level="${log.default.level}">
+    </logger>
+
+
+    <root level="INFO">
+        <appender-ref ref="DEFAULT-APPENDER"/>
+        <appender-ref ref="ERROR-APPENDER"/>
+    </root>
+
+</configuration>

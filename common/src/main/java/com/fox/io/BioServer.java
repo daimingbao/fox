@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class BioServer {
 
-    private static ThreadPoolExecutor executorService = new ThreadPoolExecutor(1, 1, 20l, TimeUnit.SECONDS, new ArrayBlockingQueue<>(20));
+    private static ThreadPoolExecutor executorService = new ThreadPoolExecutor(10, 20, 20l, TimeUnit.SECONDS, new ArrayBlockingQueue<>(20));
 
     public static void main(String[] args) throws IOException {
         server();
@@ -31,8 +31,8 @@ public class BioServer {
         System.out.println("server started");
         //等待客户端连接，阻塞了
         while (true) {
-
-            executorService.execute(new ClientAcceptRunnable(serverSocket.accept()));
+            Socket client = serverSocket.accept();
+            executorService.execute(new ClientAcceptRunnable(client));
             System.out.println("client connected");
 
         }
@@ -51,6 +51,7 @@ public class BioServer {
             try {
                 inputStream = socket.getInputStream();
                 outputStream = socket.getOutputStream();
+                System.out.println("bbb");
             } catch (Exception e) {
 
         }}
@@ -59,14 +60,18 @@ public class BioServer {
         public void run() {
             String clientCommon = null;
             while (true) {
+
                 try {
-                    System.out.println("客户端请求来了1：" + clientCommon);
 
 //                    inputStream = );
 
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                    System.out.println("客户端请求来了：" + clientCommon);
                     clientCommon = bufferedReader.readLine();
                     System.out.println("客户端请求来了：" + clientCommon);
+                    if (null == clientCommon) {
+                        continue;
+                    }
 
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
                     bufferedWriter.write(clientCommon.split("#")[0]+" pong\n");

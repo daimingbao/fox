@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+   		http://www.springframework.org/schema/beans/spring-beans.xsd
+   		http://www.springframework.org/schema/context
+    	http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx   
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
+           destroy-method="close">
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/fox"/>
+        <property name="username" value="root"/>
+        <!--<property name="password" ref="database.password"/>-->
+        <property name="password" value="liumin"/>
+        <property name="maximumPoolSize" value="20"/>
+        <property name="minimumIdle" value="1"/>
+        <property name="maxLifetime" value="2000"/>
+
+        <property name="dataSourceProperties" >
+            <props>
+                <prop key="useUnicode">true</prop>
+                <prop key="characterEncoding">utf-8</prop>
+            </props>
+        </property>
+    </bean>
+
+    <tx:annotation-driven proxy-target-class="true" transaction-manager="transactionManager" order="0"/>
+
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="sqlSessionFactory" name="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean" >
+        <property name="dataSource" ref="dataSource" />
+        <property name="mapperLocations" value="classpath*:/cn/com/fox/transaction/mapper/UserMapper.xml"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" >
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryBean" />
+        <property name="basePackage" value="cn.com.fox.transaction.mapper"/>
+    </bean>
+
+    <context:component-scan base-package="cn.com.fox.transaction">
+    </context:component-scan>
+
+</beans>

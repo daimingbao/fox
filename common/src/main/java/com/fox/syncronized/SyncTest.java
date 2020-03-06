@@ -55,6 +55,15 @@ public class SyncTest {
 
     public static synchronized void lock() {
 
+        Thread.State state = Thread.currentThread().getState();
+        System.out.println(state);
+        StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+        System.out.println(stackTrace[0].toString());
+        boolean alive = Thread.currentThread().isAlive();
+        System.out.println(alive);
+        boolean b = Thread.currentThread().holdsLock(SyncTest.class);
+        System.out.println(b);
+
         try {
             Thread.sleep(30000);
         } catch (InterruptedException e) {

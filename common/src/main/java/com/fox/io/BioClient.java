@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.Objects;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -21,17 +22,26 @@ public class BioClient {
 
     static class InputThread implements Runnable {
 
-        public InputThread(InputStream inputStream) {
-            this.inputStream = inputStream;
+        public InputThread(Socket serverSocket) {
+            try {
+                this.inputStream = serverSocket.getInputStream();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         private InputStream inputStream;
 
         @Override
         public void run() {
-            BufferedReader inputStreamReader = new BufferedReader(new InputStreamReader(inputStream));
 
             while (true) {
+
+                if (Objects.isNull(inputStream)) {
+                    continue;
+                }
+
+                BufferedReader inputStreamReader = new BufferedReader(new InputStreamReader(inputStream));
                 String s = "";
                 try {
 
@@ -48,8 +58,12 @@ public class BioClient {
 
     static class OutputThread implements Runnable {
 
-        public OutputThread(OutputStream outputStream) {
-            this.os = outputStream;
+        public OutputThread(Socket serverSocket) {
+            try {
+                this.os = serverSocket.getOutputStream();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         private OutputStream os;
@@ -57,10 +71,15 @@ public class BioClient {
         @Override
         public void run() {
             try {
-                os.write(("client-#ping").getBytes());
-                os.flush();
-                System.out.println("client send finish");
-            } catch (IOException e) {
+                while (true) {
+                    if (null != os) {
+                        System.out.println("11111");
+                        os.write(("client-#ping").getBytes());
+                        os.flush();
+                    }
+//                    Thread.sleep(1000);
+                }
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -75,20 +94,18 @@ public class BioClient {
 
     public static void client() throws IOException {
 
-        for (int i = 0; i < 5; i++) {
-            final int j = i;
+
 
             try {
                 Socket serverSocket = new Socket("127.0.0.1", 63799);
-
-                executorService.execute(new OutputThread(serverSocket.getOutputStream()));
+                new Thread(new OutputThread(serverSocket)).start();
                 System.out.println("input");
-                executorService.execute(new InputThread(serverSocket.getInputStream()));
+                new Thread(new InputThread(serverSocket)).start();
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-        }
+
     }
 
 }

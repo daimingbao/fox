@@ -1,7 +1,10 @@
 package com.fox.jvm;
 
 import com.fox.spring.ProxyService;
+import sun.misc.ProxyGenerator;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -17,21 +20,35 @@ import java.util.concurrent.TimeUnit;
 public class GCLogTest {
 
     public static void main(String[] args) throws InterruptedException {
-
+        System.getProperties().put("jdk.proxy.ProxyGenerator.saveGeneratedFiles", "true");
 //        System.setProperty("")
         List<String> list = new ArrayList<>();
         byte[] b;
         StringBuilder sb = new StringBuilder();
-         while (true) {
-//            String s = i + "bbbbb";
-//             sb = new StringBuilder();
-//            list.add(s);
-//            b = new byte[1024];
-//            sb.append(b);
-//            TimeUnit.SECONDS.sleep(2);
+//         while (true) {
              Person o = (Person) Proxy.newProxyInstance(Student.class.getClassLoader(), new Class[] { Person.class }, new ProxyGenarator(new Student()));
-             System.out.println(o);
-         }
+//             System.out.println(o.getClass().toGenericString());
+             o.talk();
+//         }
+
+
+        FileOutputStream out = null;
+        try {
+            byte[] classFile = ProxyGenerator.generateProxyClass("$Proxy0", Student.class.getInterfaces());
+            out = new FileOutputStream( "/Users/daimingbao/$Proxy0.class");
+            out.write(classFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (out != null) {
+                    out.flush();
+                    out.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
@@ -41,6 +58,8 @@ public class GCLogTest {
 
 interface Person{
     String talk();
+
+    void add();
 }
 
 class Student  implements Person{
@@ -50,7 +69,15 @@ class Student  implements Person{
     private String name = "test";
 
     @Override
+    public void add() {
+        System.out.println(this);
+        System.out.println("a");
+    }
+
+    @Override
     public String talk() {
+        System.out.println(this);
+        add();
         return "hello";
     }
 }
@@ -65,7 +92,7 @@ class ProxyGenarator implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-
+        System.out.println("你好"+method.getName());
         return  method.invoke(source, args);
     }
 }
