@@ -1,0 +1,9 @@
+package com.fox.redis;
+
+import java.lang.annotation.*;
+
+@Target({ElementType.FIELD})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface RedisInject {
+}

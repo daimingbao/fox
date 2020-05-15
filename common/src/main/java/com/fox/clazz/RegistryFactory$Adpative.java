@@ -1,3 +1,4 @@
+/*
 package com.fox.clazz;
 
 import org.apache.dubbo.common.URL;
@@ -5,10 +6,12 @@ import org.apache.dubbo.common.extension.ExtensionLoader;
 import org.apache.dubbo.registry.Registry;
 import org.apache.dubbo.registry.RegistryFactory;
 
+*/
 /**
  * @author dmb
  * @since 2020/1/14
- */
+ *//*
+
 public class RegistryFactory$Adpative implements RegistryFactory {
 
     public Registry getRegistry(URL arg0) {
@@ -20,3 +23,4 @@ public class RegistryFactory$Adpative implements RegistryFactory {
         return extension.getRegistry(arg0);
     }
 }
+*/

@@ -23,7 +23,22 @@ public class TimerTest
                 log.info("timer");
             }
         }, 5, 2000);
-
+        String d = B.D;
         LockSupport.park();
     }
+
+    private abstract interface B{
+        public static final String D = "a";
+
+    }
+
+    protected abstract interface C {
+    }
+
+}
+
+
+
+ interface A{
+
 }
