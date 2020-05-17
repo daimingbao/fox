@@ -8,7 +8,7 @@ public class DefaultSqlSession<R> implements SqlSession {
 
     @Override
     public <T> T selectOne(String var1) {
-        log.info("do db select one");
+//        log.info("do db select one");
         return (T)var1;
     }
 }

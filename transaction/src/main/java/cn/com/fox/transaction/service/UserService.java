@@ -1,6 +1,5 @@
 package cn.com.fox.transaction.service;
 
-import cn.com.fox.transaction.bean.User;
 
 /**
  * @author dmb
@@ -8,7 +7,7 @@ import cn.com.fox.transaction.bean.User;
  */
 public interface UserService {
 
-    void add(User user);
+    void register(User user);
 
     void delete(User user);
 
