@@ -2,13 +2,13 @@
 <beans xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns="http://www.springframework.org/schema/beans"
+       xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
    		http://www.springframework.org/schema/beans/spring-beans.xsd
    		http://www.springframework.org/schema/context
     	http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/tx   
-        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
 
 
 <!--    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"-->
@@ -32,7 +32,7 @@
 
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
           init-method="init" destroy-method="close">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
         <property name="url" value="jdbc:mysql://47.114.59.181:3306/fox" />
         <property name="username" value="root" />
         <property name="password" value="0p;/(OL>" />
@@ -40,6 +40,9 @@
         <property name="initialSize" value="1" />
     </bean>
 
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+<!--    <bean class="cn.com.fox.transaction.service.MyAop" init-method="init" />-->
 
 
     <tx:annotation-driven proxy-target-class="true" order="0"/>

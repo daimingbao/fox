@@ -1,5 +1,6 @@
 package cn.com.fox.transaction.service.impl;
 
+import cn.com.fox.transaction.MyAnnotation;
 import cn.com.fox.transaction.mapper.UserMapper;
 import cn.com.fox.transaction.service.*;
 import org.springframework.aop.framework.AopContext;
@@ -57,10 +58,11 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     @Transactional
+    @MyAnnotation(maxProgress = 1.0)
     public void register(User user) {
 
         //注册新用户
-        userMapper.insertSelective(user);
+//        userMapper.insertSelective(user);
         System.out.println("你好");
 //        System.out.println(this);
 //        System.out.println(AopContext.currentProxy());
@@ -69,7 +71,6 @@ public class UserServiceImpl implements UserService {
         score.setId(8);
         score.setTotal(10);
         socreService.add(score);
-
 
 //        throw new RuntimeException("spring事务 回滚测试");
     }

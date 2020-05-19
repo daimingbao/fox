@@ -1,6 +1,7 @@
 package cn.com.fox.transaction.service.impl;
 
 
+import cn.com.fox.transaction.MyAnnotation;
 import cn.com.fox.transaction.mapper.ScoreMapper;
 import cn.com.fox.transaction.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +39,12 @@ public class ScoreServiceImpl implements ScoreService {
      */
     @Override
     @Transactional(propagation = Propagation.NESTED)
+    @MyAnnotation(maxProgress = 2.0)
     public void add(Score score) {
 
         //新增积分
         try {
-            scoreMapper.add(score);
+//            scoreMapper.add(score);
         } catch (Exception e) {
 
         }
@@ -52,7 +54,7 @@ public class ScoreServiceImpl implements ScoreService {
         SystemLog systemLog = new SystemLog();
         systemLog.setLogId(18);
         systemLog.setLogDate(LocalDate.now());
-        systemLogService.add(systemLog);
+//        systemLogService.add(systemLog);
 
     }
 }
