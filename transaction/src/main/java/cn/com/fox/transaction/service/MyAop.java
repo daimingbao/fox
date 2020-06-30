@@ -1,7 +1,8 @@
 package cn.com.fox.transaction.service;
 
 
-import cn.com.fox.transaction.MyAnnotation;
+import cn.com.fox.transaction.ExecuteSegment;
+import cn.com.fox.transaction.MyThreadLocal;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.After;
@@ -29,8 +30,8 @@ public class MyAop {
     // 前置通知
     // value值：需要设置一个切入点表达式，将连接点(目标方法)找到，在连接点上执行前置通知。
     // @Before(value="execution(* *.*(..))")
-    @Before(value = "pointcut() && @annotation(myAnnotation)")
-    public void startLog(JoinPoint joinPoint, MyAnnotation myAnnotation) {
+    @Before(value = "pointcut() && @annotation(executeSegment)")
+    public void startLog(JoinPoint joinPoint, ExecuteSegment executeSegment) {
 
         // 通过JoinPoint(切入点对象)获取方法参数列表 为数组
         Object[] args = joinPoint.getArgs();
@@ -43,11 +44,13 @@ public class MyAop {
 
 
         System. out.println("[☆日志][" + methodName + "方法开始][参数值：" + asList + "]");
+
+        System.out.println(MyThreadLocal.get());
     }
 
     // 最终通知（后置通知）
-    @After(value = "pointcut() && @annotation(myAnnotation) ")
-    public void finallyLog(JoinPoint joinPoint, MyAnnotation myAnnotation) {
+    @After(value = "pointcut() && @annotation(executeSegment) ")
+    public void finallyLog(JoinPoint joinPoint, ExecuteSegment executeSegment) {
 
         Object[] args = joinPoint.getArgs();
         List<Object> asList = Arrays.asList(args);

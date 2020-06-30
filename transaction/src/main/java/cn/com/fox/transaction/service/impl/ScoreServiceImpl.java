@@ -1,7 +1,7 @@
 package cn.com.fox.transaction.service.impl;
 
 
-import cn.com.fox.transaction.MyAnnotation;
+import cn.com.fox.transaction.ExecuteSegment;
 import cn.com.fox.transaction.mapper.ScoreMapper;
 import cn.com.fox.transaction.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +39,9 @@ public class ScoreServiceImpl implements ScoreService {
      */
     @Override
     @Transactional(propagation = Propagation.NESTED)
-    @MyAnnotation(maxProgress = 2.0)
+    @ExecuteSegment(maxProgress = 2.0)
     public void add(Score score) {
+
 
         //新增积分
         try {

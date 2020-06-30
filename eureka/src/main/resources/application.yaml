@@ -1,15 +1,30 @@
 spring:
+  servlet:
+    multipart:
+      max-file-size: -1
   application:
     name: eureka-server
   datasource:
-    driver-class-name: org.gjt.mm.mysql.Driver
-    url: jdbc:mysql://baobao.cdqfxhoa3p1y.ap-northeast-1.rds.amazonaws.com/baobao
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.114.59.181/fox
     hikari:
-
-      username: baobao
-      password: daimingbao
-
+      username: root
+      password: 0p;/(OL>
+  cloud:
+    hypermedia:
+      refresh:
+        fixed-delay:
 server:
   port: 12345
 
-debug: true
+debug: false
+fox:
+  book:
+    list:
+      path: /usr/local/books
+      access:
+        url: http://47.114.59.181/book
+  we:
+    chat:
+      enpoint:
+        token: Vamce43MQdJzo9G1UAMtd6WtqqayZqEz

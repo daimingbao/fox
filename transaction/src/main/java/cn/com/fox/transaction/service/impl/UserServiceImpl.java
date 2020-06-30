@@ -1,14 +1,12 @@
 package cn.com.fox.transaction.service.impl;
 
-import cn.com.fox.transaction.MyAnnotation;
+import cn.com.fox.transaction.ExecuteSegment;
+import cn.com.fox.transaction.MyThreadLocal;
 import cn.com.fox.transaction.mapper.UserMapper;
 import cn.com.fox.transaction.service.*;
-import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDate;
 
 
 /**
@@ -58,9 +56,9 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     @Transactional
-    @MyAnnotation(maxProgress = 1.0)
+    @ExecuteSegment(maxProgress = 1.0)
     public void register(User user) {
-
+        MyThreadLocal.set("hello11111111");
         //注册新用户
 //        userMapper.insertSelective(user);
         System.out.println("你好");
