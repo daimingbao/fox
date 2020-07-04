@@ -1,20 +1,27 @@
 package com.fox.eureka.app;
 
+import cn.supfox.transaction.service.BookUseService;
 import org.apache.commons.lang.StringUtils;
+import org.apache.zookeeper.common.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.script.DigestUtils;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import request.WechatEnpointRequest;
 
+import javax.annotation.Resource;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Arrays;
@@ -26,6 +33,9 @@ import java.util.concurrent.atomic.LongAdder;
 public class AppController {
 
     private Logger log = LoggerFactory.getLogger("FOX-WEB");
+
+    @Resource
+    private BookUseService bookUseService;
 
     @Value("${fox.book.list.path}")
     private String bookListPath;
@@ -97,12 +107,29 @@ public class AppController {
             for (File bookFile : files) {
                 longAdder.add(1);
                 String bookFileName = bookFile.getName();
-                sb.append(longAdder.intValue() + ":  <a href=" + (bookListUrl + "/" + bookFileName) + " > " + bookFileName + " </a>");
+                sb.append(longAdder.intValue() + ":  <a href=" + ( "download" + File.separator + bookFileName) + " > " + bookFileName + " </a>");
                 sb.append("</br>");
             }
         }
         return sb.toString();
     }
 
+    @GetMapping("/download/{bookName}")
+    public void download(HttpServletResponse response, HttpServletRequest request, @PathVariable(name = "bookName") String bookName) {
+        File book = new File(bookListPath + File.separator + bookName);
 
+        try (ServletOutputStream outputStream = response.getOutputStream()) {
+            IOUtils.copyBytes(new FileInputStream(book), outputStream, 2048);
+            //记录书籍使用记录
+            String remoteIp = request.getHeader("remote_ip");
+            String remoteHost = request.getRemoteHost();
+            String remoteAddr = request.getRemoteAddr();
+            int remotePort = request.getRemotePort();
+            remoteIp = StringUtils.isBlank(remoteIp) ? (StringUtils.isBlank(remoteAddr) ? remoteHost+remotePort : "localhost") : remoteIp;
+
+            bookUseService.useBook(bookName, remoteIp);
+        } catch (IOException e) {
+            log.error("下载书籍失败", e);
+        }
+    }
 }

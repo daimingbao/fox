@@ -1,8 +1,5 @@
 package com.fox.threadpool;
 
-import com.sun.tools.corba.se.idl.StructEntry;
-
-import java.util.Queue;
 import java.util.concurrent.*;
 
 public class ThreadPoolTest {

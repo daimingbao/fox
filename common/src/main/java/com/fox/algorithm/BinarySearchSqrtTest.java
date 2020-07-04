@@ -1,14 +1,14 @@
 package com.fox.algorithm;
 
-import com.sun.tools.hat.internal.parser.ReadBuffer;
-
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class BinarySearchSqrtTest {
 
@@ -16,10 +16,10 @@ public class BinarySearchSqrtTest {
 
     public static void main(String[] args) throws IOException {
         int start = 0;
-        int middle = 26/2;
+        int middle = 26 / 2;
         int end = 36;
 
-        val(0,81, 0.1);
+        val(0, 81, 0.1);
 
 
         /**
@@ -40,7 +40,7 @@ public class BinarySearchSqrtTest {
         List<String> logFiles = new ArrayList<>();
         if (fileDirectory.isDirectory()) {
             File[] files = fileDirectory.listFiles();
-            for (int i= 0; i< files.length; i++) {
+            for (int i = 0; i < files.length; i++) {
                 File file = files[0];
                 if (file.getName().endsWith(".log")) {
                     logFiles.add(file.getAbsolutePath());
@@ -49,12 +49,12 @@ public class BinarySearchSqrtTest {
         }
 
         int size = logFiles.size();
-        int partitionCount = size%3 == 0 ?  size / 3 : (size / 3+1);
+        int partitionCount = size % 3 == 0 ? size / 3 : (size / 3 + 1);
         ExecutorService executorService = Executors.newFixedThreadPool(3);
 
         //String s = logFiles.get(0);
         File file = new File("/Users/paul/1.txt");
-        BufferedReader buffer = new BufferedReader( new FileReader(file));
+        BufferedReader buffer = new BufferedReader(new FileReader(file));
         List<String> fileContent = new ArrayList<>();
         String s1 = buffer.readLine();
         fileContent.add(s1);
@@ -74,7 +74,7 @@ public class BinarySearchSqrtTest {
  * 11111
  */
         List<String> s3 = new ArrayList<>();
-         fileContent.stream().filter(Objects::nonNull)
+        fileContent.stream().filter(Objects::nonNull)
                 .sorted().collect(Collectors.groupingBy(Function.identity()))
                 .forEach((s2, strings) -> {
                     s3.add(strings.size() + s2);
@@ -93,20 +93,19 @@ public class BinarySearchSqrtTest {
 
 
     /**
-     *
-     * @param start 开始值
-     * @param end 结束值
+     * @param start  开始值
+     * @param end    结束值
      * @param offset 精度值
      * @return
      */
     public static void val(int start, int end, double offset) {
 
 
-        double middle = end/2;
+        double middle = end / 2;
         double val = end;
         double v1 = end;
         double v2 = start;
-        double temp_offset = 2* offset;
+        double temp_offset = 2 * offset;
         while (temp_offset > offset) {
             double temp = middle * middle;
             if (temp == val) {
@@ -120,7 +119,7 @@ public class BinarySearchSqrtTest {
                 v2 = middle;
                 temp_offset = val - temp;
             }
-            middle = (v1 + v2)/2;
+            middle = (v1 + v2) / 2;
         }
 
         System.out.println(middle);

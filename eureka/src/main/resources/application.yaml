@@ -3,17 +3,22 @@ spring:
     multipart:
       max-file-size: -1
   application:
-    name: eureka-server
+    name: fox-server
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://47.114.59.181/fox
     hikari:
       username: root
       password: 0p;/(OL>
+    username: root
+    password: 0p;/(OL>
   cloud:
     hypermedia:
       refresh:
         fixed-delay:
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
 server:
   port: 12345
 

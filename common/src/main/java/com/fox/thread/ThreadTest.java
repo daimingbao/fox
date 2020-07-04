@@ -1,9 +1,5 @@
 package com.fox.thread;
 
-import com.sun.deploy.security.SelectableSecurityManager;
-
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.LockSupport;
 
 /**
@@ -28,7 +24,7 @@ public class ThreadTest {
             while (!Thread.currentThread().isInterrupted()) {
 //                enable ++;
 
-                System.out.println("你好"+enable);
+                System.out.println("你好" + enable);
 //                try {
 //                    Thread.sleep(1000l);
 //                } catch (InterruptedException e) {
@@ -54,7 +50,6 @@ public class ThreadTest {
         Thread.sleep(5000l);
 
         thread.interrupt();
-
 
 
 //        LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(1));
