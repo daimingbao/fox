@@ -15,6 +15,9 @@ public class ThreadLocalTest {
 
     public static void main(String[] args) {
 
+        String s = threadLocal.get();
+        System.out.println(s);
+
         Thread t1 = new Thread(new Runnable() {
             @Override
             public void run() {

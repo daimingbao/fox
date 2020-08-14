@@ -20,11 +20,11 @@
             <version>2.7.2</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.servyou</groupId>
-            <artifactId>japter-core</artifactId>
-            <version>1.4.0-RELEASE</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.servyou</groupId>-->
+<!--            <artifactId>japter-core</artifactId>-->
+<!--            <version>1.4.0-RELEASE</version>-->
+<!--        </dependency>-->
     </dependencies>
 
 
