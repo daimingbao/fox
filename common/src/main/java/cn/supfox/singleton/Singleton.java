@@ -1,31 +1,35 @@
-package cn.supfox.sington;
+package cn.supfox.singleton;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import io.netty.util.concurrent.RejectedExecutionHandler;
 
-import javax.inject.Singleton;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.*;
 
-public class Singlton {
+public class Singleton implements Serializable {
 
-    private static Singlton singlton = null;
+    private static Singleton singleton = null;
 
-    private Singlton()  {
-        if (Objects.nonNull(singlton)) {
+    private static List<Integer> intList = new ArrayList<>();
+
+    private Singleton()  {
+        if (Objects.nonNull(singleton)) {
             throw new RuntimeException("");
         }
+        System.out.println("initied singleton");
     }
 
-    public static Singlton instance() {
-        if (singlton == null) {
-            synchronized (Singlton.class) {
-                if (singlton == null) {
-                    singlton = new Singlton();
+    public static Singleton instance() {
+        if (singleton == null) {
+            synchronized (Singleton.class) {
+                if (singleton == null) {
+                    singleton = new Singleton();
                 }
             }
         }
-        return singlton;
+        return singleton;
     }
 
 
@@ -69,7 +73,7 @@ public class Singlton {
      * @param args
      */
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException, ClassNotFoundException {
         ThreadPoolExecutor executor = new ThreadPoolExecutor(5,
                 5,
                 10 , TimeUnit.SECONDS,
@@ -77,15 +81,47 @@ public class Singlton {
                 new ThreadFactoryBuilder().setPriority(1).setThreadFactory(Executors.defaultThreadFactory()).build(),
                 new ThreadPoolExecutor.DiscardPolicy());
 
-        CountDownLatch countDownLatch = new CountDownLatch(6);
-        for (int i = 0; i< 6 ; i++) {
+        CountDownLatch countDownLatch = new CountDownLatch(15);
+        for (int i = 0; i< 15 ; i++) {
+            int finalI = i;
             executor.submit(() -> {
                 countDownLatch.countDown();
-                System.out.println(Singlton.instance());
+                System.out.println("调用"+finalI);
+                intList.add(finalI);
+                for (int i1 : intList){
+                    System.out.println(intList.remove(i1));
+                }
+                System.out.println(MyInstance.singleton);
             });
 
         }
         countDownLatch.await();
         executor.shutdown();
+
+        System.out.println("===" +intList.size());
+        System.out.println("==="+intList.size());
+
+        File tempFile = File.createTempFile("/tmp", ".bin");
+        //序列化
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(tempFile));
+        objectOutputStream.writeObject(MyInstance.singleton);
+
+        System.out.println("\n");
+        //反序列化
+        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(tempFile));
+
+        Singleton o = (Singleton) objectInputStream.readObject();
+        System.out.println(o);
+
+
+        System.out.println(MyInstance.singleton);
+    }
+
+    public Object readResolve() {
+        return MyInstance.singleton;
+    }
+
+    private static class MyInstance {
+        public static Singleton singleton = new Singleton();
     }
 }

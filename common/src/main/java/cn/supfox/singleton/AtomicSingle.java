@@ -1,4 +1,4 @@
-package cn.supfox.sington;
+package cn.supfox.singleton;
 
 import java.util.ArrayList;
 import java.util.HashSet;
