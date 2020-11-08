@@ -5,13 +5,15 @@
     <modules>
         <module>boot</module>
         <module>common</module>
-        <module>dubbo</module>
-<!--        <module>web</module>-->
+        <module>web</module>
         <module>core</module>
         <module>api</module>
         <module>service</module>
         <module>elasticsearch</module>
         <module>servlet</module>
+        <module>dubbo-consumer</module>
+        <module>dubbo-api</module>
+        <module>quartz</module>
     </modules>
 
     <parent>
