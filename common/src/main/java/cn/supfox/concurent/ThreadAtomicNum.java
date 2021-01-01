@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
@@ -37,7 +38,7 @@ public class ThreadAtomicNum {
 
         while (true) {
             ExecutorService service = Executors.newSingleThreadExecutor();
-            service.submit(t1);
+            Future<?> submit = service.submit(t1);
             TimeUnit.SECONDS.sleep(1);
             service.submit(t2);
             TimeUnit.SECONDS.sleep(1);
@@ -57,15 +58,12 @@ public class ThreadAtomicNum {
             Thread t1 = new Thread(() -> System.out.println("1:"+count.getAndIncrement()) );
             Thread t2 = new Thread(() -> System.out.println("2:"+count.getAndIncrement()) );
             Thread t3 = new Thread(() -> System.out.println("3:"+count.getAndIncrement()) );
-            if (!start)
             t1.start();
             t1.join();
             TimeUnit.SECONDS.sleep(1);
-            if (!start)
             t2.start();
             t2.join();
             TimeUnit.SECONDS.sleep(1);
-            if (!start)
             t3.start();
             t3.join();
             TimeUnit.SECONDS.sleep(1);
@@ -75,9 +73,45 @@ public class ThreadAtomicNum {
     }
 
     public static void main(String[] args) throws InterruptedException {
-
+        double a=  10/0;
+        ThreadAtomicNum threadAtomicNum = new ThreadAtomicNum();
 //        test();
-        test2();
+//        test2();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                synchronized (threadAtomicNum) {
+                    System.out.println("2");
+                    try {
+                        threadAtomicNum.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("4");
+                }
+            }
+        },"test").start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                synchronized (threadAtomicNum) {
+                    System.out.println("2");
+                    try {
+                        threadAtomicNum.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("4");
+                }
+            }
+        },"test1").start();
+//        synchronized (ThreadAtomicNum.class) {
+//            System.out.println("1");
+//            ThreadAtomicNum.class.wait();
+//            System.out.println("3");
+//        }
+
 
 
 //        Thread t1 = new Thread( new  CountThread(), "a" );

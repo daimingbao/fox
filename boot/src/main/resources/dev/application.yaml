@@ -36,20 +36,20 @@ fox:
       enpoint:
         token: Vamce43MQdJzo9G1UAMtd6WtqqayZqEz
 
-
-eureka:
-  instance:
-    prefer-ip-address: true
-    hostname: 127.0.0.1
-    instance-id: 127.0.0.1:${spring.application.name}:${server.port}
-  server:
-    enable-self-preservation: false
-    eviction-interval-timer-in-ms: 4000
-  client:
-    registerWithEureka: true
-    fetchRegistry: false
-    serviceUrl:
-        defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
-ribbon:
-  eureka:
-    enabled: true
+#
+#eureka:
+#  instance:
+#    prefer-ip-address: true
+#    hostname: 127.0.0.1
+#    instance-id: 127.0.0.1:${spring.application.name}:${server.port}
+#  server:
+#    enable-self-preservation: false
+#    eviction-interval-timer-in-ms: 4000
+#  client:
+#    registerWithEureka: true
+#    fetchRegistry: false
+#    serviceUrl:
+#        defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
+#ribbon:
+#  eureka:
+#    enabled: true

@@ -13,9 +13,9 @@ public class RootController {
         log.info("init RootController");
     }
 
-    @RequestMapping("/")
-    public String index() {
-        return "hello world ";
-    }
+//    @RequestMapping("/")
+//    public String index() {
+//        return "hello world ";
+//    }
 
 }

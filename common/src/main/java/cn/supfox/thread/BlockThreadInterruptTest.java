@@ -12,7 +12,7 @@ public class BlockThreadInterruptTest {
             while (!Thread.currentThread().isInterrupted()) {
                 try {
                     System.out.println("没清除的中断标记0"+ Thread.currentThread().isInterrupted());
-                    Thread.sleep(1000l);
+                    Thread.sleep(1000L);
                 } catch (InterruptedException e) {
                     System.out.println("睡眠中的线程被中断异常中断了，还是可以继续执行，可以充分利益线程资源，唤醒睡眠" +
                             "中的线程执行任务");
@@ -29,7 +29,7 @@ public class BlockThreadInterruptTest {
         });
 
         thread.start();
-        TimeUnit.MICROSECONDS.sleep(100l);
+        TimeUnit.MICROSECONDS.sleep(100L);
         thread.interrupt();
 
         LockSupport.park();

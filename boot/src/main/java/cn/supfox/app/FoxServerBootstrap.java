@@ -13,7 +13,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  */
 @SpringBootApplication(scanBasePackages = {"cn.supfox", "cn.com"})
 @MapperScan(basePackages = {"cn.supfox.core.mapper"})
-@EnableEurekaServer
+//@EnableEurekaServer
 //@EnableFeignClients(basePackages = "cn.com")
 public class FoxServerBootstrap {
 

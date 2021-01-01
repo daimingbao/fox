@@ -1,6 +1,4 @@
 FROM jre
-VOLUME /tmp
-COPY target/*.jar fox-1.0.jar
-RUN sh -c "touch /fox-1.0.jar"
+ADD /target/*.jar fox.jar
 EXPOSE 12345
-ENTRYPOINT ["java","-jar","fox-1.0.jar"]
+ENTRYPOINT ["java","-jar","fox.jar"]
