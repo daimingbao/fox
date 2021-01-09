@@ -1,0 +1,44 @@
+package cn.supfox.pattern.prototype.singleton;
+
+
+import lombok.Data;
+
+import java.util.List;
+
+/**
+ * Created by Tom.
+ */
+@Data
+public class ConcretePrototype implements Cloneable {
+
+    private int age;
+    private String name;
+    private List<String> hobbies;
+
+    private static  ConcretePrototype instance = new ConcretePrototype();
+
+    private ConcretePrototype(){}
+
+    public static ConcretePrototype getInstance(){
+        return instance;
+    }
+
+    /**
+     * 如果我需要单例，怎么防止克隆破坏单例<br>
+     * @return
+     */
+    @Override
+    public ConcretePrototype clone() {
+       return instance;
+    }
+
+
+    @Override
+    public String toString() {
+        return "ConcretePrototype{" +
+                "age=" + age +
+                ", name='" + name + '\'' +
+                ", hobbies=" + hobbies +
+                '}';
+    }
+}
