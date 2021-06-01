@@ -24,7 +24,7 @@ public class JsonLogger extends LoggerDecorator {
     public void error(String s) {
         JSONObject result = newJsonObject();
         result.put("message",s);
-        logger.info(result.toString());
+        logger.error(result.toString());
     }
 
     public void error(Exception e){

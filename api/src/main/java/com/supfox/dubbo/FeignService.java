@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@FeignClient("fox-server")
+//@FeignClient("fox-server")
 public interface FeignService {
     @PostMapping("/get")
     String getName(@RequestBody @Validated DemoRequest request);

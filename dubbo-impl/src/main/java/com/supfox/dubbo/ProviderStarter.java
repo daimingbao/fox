@@ -9,7 +9,7 @@ public class ProviderStarter {
 
     public static void main(String[] args) throws InterruptedException, IOException {
 
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ProviderConfiguration.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ProviderConfiguration.class, FoxConfiguration.class);
         context.start();
 
         System.in.read();

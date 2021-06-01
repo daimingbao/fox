@@ -1,0 +1,18 @@
+{
+  "properties": [
+    {
+      "name": "fox.redisson.host",
+      "type": "java.lang.String",
+      "description": "redis 服务器地址",
+      "defaultValue": true,
+      "defaultValue": "localhost"
+    },
+    {
+      "name": "fox.redisson.host",
+      "type": "java.util.Integer",
+      "description": "redis服务器端口",
+      "defaultValue": "6377"
+    }
+  ]
+}
+

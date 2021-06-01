@@ -1,7 +1,10 @@
 package cn.supfox.request;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
+@Data
 public class WechatEnpointRequest implements Serializable {
 
     private String signature;

@@ -42,17 +42,17 @@ public class ScoreServiceImpl implements ScoreService {
      * @param score
      */
     @Override
-    @Transactional(propagation = Propagation.NESTED)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     @ExecuteSegment(maxProgress = 2.0)
     public void add(Score score) {
 
 
         //新增积分
-        try {
-//            scoreMapper.add(score);
-        } catch (Exception e) {
-
-        }
+//        try {
+            scoreMapper.add(score);
+//        } catch (Exception e) {
+//
+//        }
 
 
         //记日志

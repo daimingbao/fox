@@ -1,0 +1,6 @@
+-XX:InitialHeapSize=134217728
+-XX:MaxHeapSize=2147483648
+-XX:+PrintCommandLineFlags
+-XX:+UseCompressedClassPointers
+-XX:+UseCompressedOops
+-XX:+UseParallelGC

@@ -8,7 +8,17 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ConcurentHashMapTest {
 
+    private static class A{
+
+        private String name;
+
+//        public A(String name) {
+//            this.name = name;
+//        }
+    }
+
     public static void main(String[] args) {
+        A a =  new A();
         ConcurrentHashMap map = new ConcurrentHashMap<Integer, Integer>();
         map.put(1,1);
     }

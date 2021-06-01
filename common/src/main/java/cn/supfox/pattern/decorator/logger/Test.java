@@ -16,6 +16,7 @@ public class Test {
     {
         System.out.println("开始打印日志");
         logger.error("系统错误");
+        logger.info("系统错误");
         System.out.println("结束打印日志");
     }
 
@@ -23,17 +24,17 @@ public class Test {
     public  void test2()
     {
         try {
-            InputStream in = new FileInputStream("Test.class");
+            InputStream in = new FileInputStream("/Users/paul/code/fox/common/src/main/java/cn/supfox/pattern/decorator/logger/Test.java");
 
             BufferedInputStream bis = new BufferedInputStream(in);
 
             bis.read();
             bis.close();
 
-            BufferedReader br = new BufferedReader(new FileReader(""));
+            BufferedReader br = new BufferedReader(new FileReader("/Users/paul/code/fox/common/src/main/java/cn/supfox/pattern/decorator/logger/Test.java"));
             br.readLine();
 
-            BufferedReader bs = new BufferedReader(new StringReader(""));
+            BufferedReader bs = new BufferedReader(new StringReader("/Users/paul/code/fox/common/src/main/java/cn/supfox/pattern/decorator/logger/Test.java"));
             bs.readLine();
 
         } catch (Exception e) {

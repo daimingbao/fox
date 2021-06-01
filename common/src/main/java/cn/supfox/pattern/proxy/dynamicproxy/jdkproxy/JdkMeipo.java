@@ -25,6 +25,7 @@ public class JdkMeipo implements InvocationHandler {
      * @throws Throwable
      */
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        //张山吃饭 findlove
         before();
         Object result = method.invoke(this.target,args);
         after();

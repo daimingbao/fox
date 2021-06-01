@@ -1,0 +1,61 @@
+spring:
+  aop:
+    proxy-target-class: false
+  servlet:
+    multipart:
+      max-file-size: -1
+  application:
+    name: fox-server
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://182.254.151.252/supfox
+    hikari:
+      username: root
+      password: 0p;/(OL>
+    username: root
+    password: 0p;/(OL>
+  cloud:
+    hypermedia:
+      refresh:
+        fixed-delay:
+  profiles:
+    active: dev
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+server:
+  port: 12345
+
+debug: false
+fox:
+  redisson:
+    port: 6379
+    host: 182.254.151.252
+  book:
+    list:
+      path: /usr/local/books
+      access:
+        url: http://182.254.151.252/book
+  we:
+    chat:
+      enpoint:
+        token: Vamce43MQdJzo9G1UAMtd6WtqqayZqEz
+
+
+#
+#eureka:
+#  instance:
+#    prefer-ip-address: true
+#    hostname: 127.0.0.1
+#    instance-id: 127.0.0.1:${spring.application.name}:${server.port}
+#  server:
+#    enable-self-preservation: false
+#    eviction-interval-timer-in-ms: 4000
+#  client:
+#    registerWithEureka: true
+#    fetchRegistry: false
+#    serviceUrl:
+#        defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
+#ribbon:
+#  eureka:
+#    enabled: true

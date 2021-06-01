@@ -14,9 +14,9 @@ public class ThreadInterruptTest {
             while (!Thread.currentThread().isInterrupted()) {
                 System.out.println("有没有被中断"+ Thread.currentThread().isInterrupted());
             }
-            System.out.println("是否被中断了：" +Thread.currentThread().isInterrupted());
+            System.out.println("是否被中断了1：" +Thread.currentThread().isInterrupted());
             System.out.println("清楚当前线程中断标记：" +Thread.interrupted());
-            System.out.println("是否被中断了：" +Thread.currentThread().isInterrupted());
+            System.out.println("是否被中断了2：" +Thread.currentThread().isInterrupted());
             System.out.println("线程结束了");
         });
 

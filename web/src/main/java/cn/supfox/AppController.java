@@ -1,18 +1,23 @@
 package cn.supfox;
 
+import cn.supfox.core.db.User;
 import cn.supfox.core.service.BookUseService;
+import cn.supfox.core.service.UserService;
 import cn.supfox.request.WechatEnpointRequest;
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang.StringUtils;
 import org.apache.zookeeper.common.IOUtils;
+import org.redisson.api.RedissonClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.event.EventListener;
 import org.springframework.data.redis.core.script.DigestUtils;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.support.ServletRequestHandledEvent;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -29,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.LongAdder;
 
+@Scope(scopeName = "prototype")
 @RestController
 public class AppController {
 
@@ -45,6 +51,34 @@ public class AppController {
 
     @Value(("${fox.we.chat.enpoint.token}"))
     private String wechatEnpointToken;
+
+    @Resource
+    private RedissonClient redissonClient;
+
+    @Resource
+    private UserService userService;
+
+    @GetMapping("/rest/test")
+    public String test(@RequestParam(name = "name") String name) {
+
+        System.out.println(name);
+        return "ok receive message ===> " + name;
+    }
+
+    @GetMapping("/redisson")
+    public WechatEnpointRequest testRedisson(@RequestParam(name = "name") String name, @RequestBody WechatEnpointRequest request) {
+
+        userService.register(new User());
+        redissonClient.getBucket("test").set("dmb");
+        Object test = redissonClient.getBucket("test").get();
+        request.setEchostr(test.toString());
+        return request;
+    }
+
+    @EventListener
+    public void listener(ServletRequestHandledEvent servletRequestHandledEvent) {
+        System.out.println("监听到事件{}"+ JSON.toJSONString(servletRequestHandledEvent));
+    }
 
     /**
      * 1）将token、timestamp、nonce三个参数进行字典序排序

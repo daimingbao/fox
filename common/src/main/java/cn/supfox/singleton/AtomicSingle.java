@@ -24,6 +24,9 @@ public class AtomicSingle {
 
         if (atomicSingle.get() == null) {
             boolean b = atomicSingle.compareAndSet(null, new AtomicSingle());
+            while (!b) {
+                b = atomicSingle.compareAndSet(null, new AtomicSingle());
+            }
         }
         return atomicSingle.get();
     }
@@ -32,11 +35,12 @@ public class AtomicSingle {
 
         Set<AtomicSingle> set = new HashSet();
         List<AtomicSingle> list = new ArrayList<>();
-        CyclicBarrier cyclicBarrier = new CyclicBarrier(101);
-        for (int i=0 ; i< 100; i++) {
+        CyclicBarrier cyclicBarrier = new CyclicBarrier(5);
+        for (int i=0 ; i< 4; i++) {
             final int b = i;
             new Thread(() -> {
                 try {
+                    System.out.println("b " + b);
                     cyclicBarrier.await();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -51,6 +55,7 @@ public class AtomicSingle {
         }
 
         cyclicBarrier.await();
+        System.out.println("wait end");
         System.out.println(set.size());
         System.out.println(list.size());
 

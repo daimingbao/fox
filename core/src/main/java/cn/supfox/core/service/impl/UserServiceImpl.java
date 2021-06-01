@@ -9,6 +9,7 @@ import cn.supfox.core.service.SystemLogService;
 import cn.supfox.core.service.UserService;
 import cn.supfox.core.support.MyThreadLocal;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 2020/2/20
  */
 @Service
+@Scope(scopeName = "prototype")
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -28,6 +30,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private SystemLogService systemLogService;
+
+    public static int a = 0;
 
     @Override
     public void delete(User user) {
@@ -62,18 +66,22 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @ExecuteSegment(maxProgress = 1.0)
     public void register(User user) {
-        MyThreadLocal.set("hello11111111");
         //注册新用户
-//        userMapper.insertSelective(user);
-        System.out.println("你好");
-//        System.out.println(this);
-//        System.out.println(AopContext.currentProxy());
+        userMapper.insertSelective(user);
+        a++;
+        System.out.println(a);
         //加积分
         Score score = new Score();
         score.setId(8);
         score.setTotal(10);
-        socreService.add(score);
 
-//        throw new RuntimeException("spring事务 回滚测试");
+        //catch的情况 register方法不回滚 add方法回滚
+//        try {
+            socreService.add(score);
+//        } catch (Exception e) {
+
+//        }
+//        throw new RuntimeException();
+
     }
 }

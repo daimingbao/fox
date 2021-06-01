@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://impl.v1.ws.api.service.yxt.gooben.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://v1.ws.api.service.yxt.gooben.com/" name="WsItfTask" targetNamespace="http://impl.v1.ws.api.service.yxt.gooben.com/">
+  <wsdl:import location="http://115.239.137.23:9501/ws/v1?wsdl=WsItfTask.wsdl" namespace="http://v1.ws.api.service.yxt.gooben.com/">
+    </wsdl:import>
+  <wsdl:binding name="WsItfTaskSoapBinding" type="ns1:WsItfTask">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getSentResultCall">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getSentResultCall">
+        <soap:header message="ns1:getSentResultCall" part="token" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getSentResultCallResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSubmitResult">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getSubmitResult">
+        <soap:header message="ns1:getSubmitResult" part="token" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getSubmitResultResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addFile">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="addFile">
+        <soap:header message="ns1:addFile" part="token" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addFileResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSentTaskResultCall">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getSentTaskResultCall">
+        <soap:header message="ns1:getSentTaskResultCall" part="token" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getSentTaskResultCallResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSentTaskResultSms">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getSentTaskResultSms">
+        <soap:header message="ns1:getSentTaskResultSms" part="token" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getSentTaskResultSmsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="submitTask">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="submitTask">
+        <soap:header message="ns1:submitTask" part="token" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="submitTaskResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSentResultSms">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getSentResultSms">
+        <soap:header message="ns1:getSentResultSms" part="token" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getSentResultSmsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="authorization">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="authorization">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="authorizationResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSmsReceive">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getSmsReceive">
+        <soap:header message="ns1:getSmsReceive" part="token" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getSmsReceiveResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WsItfTask">
+    <wsdl:port binding="tns:WsItfTaskSoapBinding" name="WsItfTaskImplPort">
+      <soap:address location="http://115.239.137.23:9501/ws/v1"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
