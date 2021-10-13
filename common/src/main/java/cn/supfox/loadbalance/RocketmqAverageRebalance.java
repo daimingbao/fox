@@ -1,6 +1,5 @@
 package cn.supfox.loadbalance;
 
-import com.sun.deploy.net.MessageHeader;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -18,21 +18,17 @@ public class GCLogTest {
 
     public static void main(String[] args) throws InterruptedException {
         System.getProperties().put("jdk.proxy.ProxyGenerator.saveGeneratedFiles", "true");
-//        System.setProperty("")
         List<String> list = new ArrayList<>();
-        byte[] b;
         StringBuilder sb = new StringBuilder();
-//         while (true) {
-             Person o = (Person) Proxy.newProxyInstance(Student.class.getClassLoader(), new Class[] { Person.class }, new ProxyGenarator(new Student()));
-//             System.out.println(o.getClass().toGenericString());
-             o.talk();
-//         }
+        Person o = (Person) Proxy.newProxyInstance(Student.class.getClassLoader(), new Class[]{Person.class}, new ProxyGenarator(new Student()));
+        System.out.println(o.getClass().toGenericString());
+        o.talk();
 
 
         FileOutputStream out = null;
         try {
             byte[] classFile = ProxyGenerator.generateProxyClass("$Proxy0", Student.class.getInterfaces());
-            out = new FileOutputStream( "/Users/daimingbao/$Proxy0.class");
+            out = new FileOutputStream("/Users/daimingbao/$Proxy0.class");
             out.write(classFile);
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,25 +46,20 @@ public class GCLogTest {
     }
 
 
-
 }
 
-interface Person{
+interface Person {
     String talk();
 
     void add();
 }
 
-class Student  implements Person{
-
-    private int i=0;
-    private int b=0;
-    private String name = "test";
+class Student implements Person {
 
     @Override
     public void add() {
         System.out.println(this);
-        System.out.println("a");
+        System.out.println("方法add");
     }
 
     @Override
@@ -89,7 +80,7 @@ class ProxyGenarator implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        System.out.println("你好"+method.getName());
-        return  method.invoke(source, args);
+        System.out.println("你好" + method.getName());
+        return method.invoke(source, args);
     }
 }
