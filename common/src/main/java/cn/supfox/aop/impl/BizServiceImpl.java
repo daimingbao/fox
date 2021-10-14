@@ -8,5 +8,11 @@ public class BizServiceImpl implements BizService {
     @Override
     public void doBiz() {
         System.out.println("业务逻辑");
+        doOtherBiz();
+    }
+
+    @Override
+    public void doOtherBiz() {
+        System.out.println("其他业务逻辑");
     }
 }
