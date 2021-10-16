@@ -32,6 +32,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.LongAdder;
 
 @Scope(scopeName = "prototype")
@@ -61,7 +62,10 @@ public class AppController {
     @GetMapping("/rest/test")
     public String test(@RequestParam(name = "name") String name) {
 
-        System.out.println(name);
+        redissonClient.getFairLock("dmb").lock(10, TimeUnit.MINUTES);
+        redissonClient.getFairLock("dmb").lock(10, TimeUnit.MINUTES);
+        redissonClient.getFairLock("dmb").unlock();
+
         return "ok receive message ===> " + name;
     }
 

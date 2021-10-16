@@ -17,7 +17,7 @@ public class App
     public static void main( String[] args ) throws SchedulerException {
 
         QuartzSchedulerResources resources = new QuartzSchedulerResources();
-        resources.set
+        resources.setJMXObjectName("aa");
         QuartzScheduler sched = new QuartzScheduler(resources, 5, 5);
         Scheduler scheduler = new StdScheduler(sched);
         JobDetailImpl jobDetail = new JobDetailImpl();

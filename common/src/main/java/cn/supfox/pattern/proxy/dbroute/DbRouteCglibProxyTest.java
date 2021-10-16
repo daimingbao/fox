@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * Created by Tom.
  */
-public class DbRouteProxyTest {
+public class DbRouteCglibProxyTest {
 
     @Test
     public void test1(){

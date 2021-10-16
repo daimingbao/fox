@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  * Created by Tom.
  */
-public class JdkDynamicProxyTest {
+public class JdkDynamicCglibProxyTest {
     public static void main(String[] args) {
         JdkMeipo jdkMeipo = new JdkMeipo();
         //动态代理类是动态生成的，根据客户需求来生成的，动态生成新的类（相当于根据需求来生成）

@@ -7,7 +7,7 @@ import java.util.Objects;
 public class HashMapTest {
 
     public static void main(String[] args) {
-        Map map = new HashMap<HashMapKey, Integer>(5);
+        Map map = new HashMap<HashMapKey, Integer>(21);
         HashMapKey hashMapKey = new HashMapKey();
         map.put(hashMapKey, 1);
         map.put(hashMapKey, 2);

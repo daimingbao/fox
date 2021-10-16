@@ -1,4 +1,4 @@
-package cn.supfox;
+package cn.supfox.proxy;
 
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
@@ -7,16 +7,9 @@ import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 
 import java.lang.reflect.Method;
 
-public class ProxyTest {
+public class CglibProxyTest {
 
     public static void main(String[] args) {
-
-        Boolean o1 = true;
-        Boolean o2 = true;
-        boolean a =   o1 | o2;
-        boolean b =   o1 & o2;
-        System.out.println(a);
-        System.out.println(b);
 
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(ProxyDemo.class);

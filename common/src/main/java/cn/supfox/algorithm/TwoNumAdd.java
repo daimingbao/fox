@@ -1,6 +1,8 @@
 package cn.supfox.algorithm;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 1. 两数之和
@@ -12,8 +14,25 @@ public class TwoNumAdd {
 
     public static void main(String[] args) {
         int[] nums = new int[]{2, 7, 11, 15};
+        //解法1
         int[] ints = twoSum(nums, 26);
         System.out.println(Arrays.toString(ints));
+
+
+
+        //解法2 用hash表，把结果存下来
+        int target = 6;
+        int[] result = new int[2];
+        Map<Integer,Integer> map = new HashMap();
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(target-nums[i]) ) {
+                result[0] = map.get(target-nums[i]);
+                result[1] = i;
+                System.out.println(map.get(target-nums[i]));
+                System.out.println(i );
+            }
+            map.put(nums[i],i);
+        }
     }
 
     public static int[] twoSum(int[] nums, int target) {
