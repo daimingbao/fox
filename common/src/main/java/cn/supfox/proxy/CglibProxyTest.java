@@ -11,11 +11,14 @@ public class CglibProxyTest {
 
     public static void main(String[] args) {
 
+
+        ProxyDemo proxyDemo = new ProxyDemo();
+        proxyDemo.setName("你好");
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(ProxyDemo.class);
-        enhancer.setCallback(new ProxyInterceptor());
-        Object o = enhancer.create();
-        System.out.println(o);
+        enhancer.setCallback(new ProxyInterceptor(proxyDemo));
+        proxyDemo = (ProxyDemo) enhancer.create();
+        System.out.println(proxyDemo.getName());
     }
 
     public static class ProxyDemo {
@@ -36,13 +39,17 @@ public class CglibProxyTest {
 
     private static class ProxyInterceptor implements MethodInterceptor {
 
+        private ProxyDemo proxyDemo;
+
+        public ProxyInterceptor(ProxyDemo proxyDemo) {
+            this.proxyDemo = proxyDemo;
+        }
+
         @Override
         public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
             System.out.println("拦截");
-//            if (method.getName().equals("getName")) {
-//                Object invoke = method.invoke(o, objects);
-//            }
-            Object o1 = methodProxy.invokeSuper(o, objects);
+            System.out.println(o.getClass());
+            Object o1 = methodProxy.invokeSuper(proxyDemo, objects);
 
             return o1;
         }

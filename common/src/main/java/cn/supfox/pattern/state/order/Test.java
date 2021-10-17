@@ -10,7 +10,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  * Created by Tom.
  * 给你自定义过程：这个状态下有哪些行为，这个状态的下一个状态是什么？
  */
-@SpringBootApplication
+//@SpringBootApplication
 public class Test {
     static Logger log = LoggerFactory.getLogger(Test.class);
     public static void main(String[] args) {
