@@ -6,7 +6,6 @@ import net.sf.cglib.core.DebuggingClassWriter;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
-import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 
 import java.lang.reflect.Method;
 
@@ -21,7 +20,7 @@ public class CglibProxyTest {
         enhancer.setSuperclass(TicketServiceImpl.class);
         enhancer.setCallback(new ProxyInterceptor(ticketService));
         ticketService = (TicketService) enhancer.create();
-        ticketService.sendTicket("1", "2");
+        ticketService.sendTicket("1", "新人券");
     }
 
 

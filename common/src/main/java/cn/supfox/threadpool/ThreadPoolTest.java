@@ -10,5 +10,11 @@ public class ThreadPoolTest {
         ThreadPoolExecutor executor = new ThreadPoolExecutor(2,5,2, TimeUnit.SECONDS,new ArrayBlockingQueue<>(10));
         Future<?> a = executor.submit(new FutureTask<>(() -> System.out.printf("a"), null));
         Object o = a.get();
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                //业务逻辑
+            }
+        });
     }
 }

@@ -12,6 +12,20 @@ public class ReverseList {
 
     public static ListNode reverseList(ListNode head) {
 
+
+
+        ListNode pre = null;
+        ListNode n = null;
+        ListNode cu = head;
+        while (cu != null) {
+            n = cu.next;
+            cu.next = pre;
+            pre = cu;
+            cu = n;
+        }
+
+
+
         if (head == null || head.next == null) {
             return head;
         }
