@@ -1,6 +1,6 @@
 package cn.supfox.jvm;
 
-import sun.misc.ProxyGenerator;
+//import sun.misc.ProxyGenerator;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -27,9 +27,9 @@ public class GCLogTest {
 
         FileOutputStream out = null;
         try {
-            byte[] classFile = ProxyGenerator.generateProxyClass("$Proxy0", Student.class.getInterfaces());
+//            byte[] classFile = ProxyGenerator.generateProxyClass("$Proxy0", Student.class.getInterfaces());
             out = new FileOutputStream("/Users/daimingbao/$Proxy0.class");
-            out.write(classFile);
+//            out.write(classFile);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

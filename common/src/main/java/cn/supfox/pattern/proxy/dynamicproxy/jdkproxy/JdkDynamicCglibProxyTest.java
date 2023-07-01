@@ -1,7 +1,7 @@
 package cn.supfox.pattern.proxy.dynamicproxy.jdkproxy;
 
 import org.junit.Test;
-import sun.misc.ProxyGenerator;
+//import sun.misc.ProxyGenerator;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -66,11 +66,11 @@ public class JdkDynamicCglibProxyTest {
     public void testPrintJdkProxyDynamicClass()
     {
         //$Proxy0
-        byte [] bytes = ProxyGenerator.generateProxyClass("$Proxy0",new Class[]{IPerson.class});
+//        byte [] bytes = ProxyGenerator.generateProxyClass("$Proxy0",new Class[]{IPerson.class});
 
         try {
             FileOutputStream os = new FileOutputStream("D://$Proxy0-IPerson897.class");
-            os.write(bytes);
+//            os.write(bytes);
 //            os.close();
         } catch (IOException e) {
             e.printStackTrace();

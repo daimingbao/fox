@@ -5,6 +5,7 @@ import cn.supfox.core.service.BookUseService;
 import cn.supfox.core.service.UserService;
 import cn.supfox.request.WechatEnpointRequest;
 import com.alibaba.fastjson.JSON;
+import com.netflix.ribbon.proxy.annotation.Hystrix;
 import org.apache.commons.lang.StringUtils;
 import org.apache.zookeeper.common.IOUtils;
 import org.redisson.api.RedissonClient;
@@ -60,6 +61,7 @@ public class AppController {
     private UserService userService;
 
     @GetMapping("/rest/test")
+    @HystrixComm
     public String test(@RequestParam(name = "name") String name) {
 
         redissonClient.getFairLock("dmb").lock(10, TimeUnit.MINUTES);

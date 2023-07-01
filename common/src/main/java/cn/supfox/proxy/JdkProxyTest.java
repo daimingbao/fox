@@ -2,7 +2,7 @@ package cn.supfox.proxy;
 
 import cn.supfox.proxy.service.LoginService;
 import cn.supfox.proxy.service.impl.LoginServiceImpl;
-import sun.misc.ProxyGenerator;
+//import sun.misc.ProxyGenerator;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -40,9 +40,9 @@ public class JdkProxyTest {
     private static void generateClassFile() {
         FileOutputStream out = null;
         try {
-            byte[] classFile = ProxyGenerator.generateProxyClass("com.supfox.proxytest", LoginServiceImpl.class.getInterfaces(), 17);
-            out = new FileOutputStream("/Users/paul/$Proxy2.class");
-            out.write(classFile);
+//            byte[] classFile = ProxyGenerator.generateProxyClass("com.supfox.proxytest", LoginServiceImpl.class.getInterfaces(), 17);
+//            out = new FileOutputStream("/Users/paul/$Proxy2.class");
+//            out.write(classFile);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -60,9 +60,9 @@ public class JdkProxyTest {
     private static void saveProxyClass() {
         FileOutputStream out = null;
         try {
-            byte[] classFile = ProxyGenerator.generateProxyClass("$Proxy0", LoginService.class.getInterfaces());
-            out = new FileOutputStream("/Users/paul/$Proxy0.class");
-            out.write(classFile);
+//            byte[] classFile = ProxyGenerator.generateProxyClass("$Proxy0", LoginService.class.getInterfaces());
+//            out = new FileOutputStream("/Users/paul/$Proxy0.class");
+//            out.write(classFile);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

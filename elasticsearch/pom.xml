@@ -16,7 +16,7 @@
         <dependency>
             <groupId>org.elasticsearch.plugin</groupId>
             <artifactId>x-pack-sql-jdbc</artifactId>
-            <version>6.4.0</version>
+            <version>8.6.2</version>
         </dependency>
 <!--        <dependency>-->
 <!--            <groupId>org.elasticsearch.plugin</groupId>-->
@@ -35,11 +35,11 @@
 <!--        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/org.elasticsearch.plugin/x-pack-api -->
-        <dependency>
-            <groupId>org.elasticsearch.plugin</groupId>
-            <artifactId>x-pack-api</artifactId>
-            <version>6.0.0-alpha2</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.elasticsearch.plugin</groupId>-->
+<!--            <artifactId>x-pack-api</artifactId>-->
+<!--            <version></version>-->
+<!--        </dependency>-->
     </dependencies>
 
 

@@ -19,14 +19,6 @@ public class RestTemplateConfig {
         restTemplate.setRequestFactory(new OkHttp3ClientHttpRequestFactory());
         //使用自定义的uri处理器，实现参数追加到url的功能
         restTemplate.setUriTemplateHandler(new GetUriTemplateHandler());
-
-
-
-
-
-
-
-
         return restTemplate;
     }
 
